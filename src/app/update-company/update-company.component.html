@@ -1,0 +1,60 @@
+<div class="breadcrum">
+    <div routerLink="/main/Company" class="to-back" matRipple> <span class="material-icons">keyboard_backspace</span></div>
+    <h1>Update Company</h1>
+    <ul class="navi">
+        <li>
+            <a>Company Management</a>
+        </li>
+        <li>Update Company</li>
+    </ul>
+  </div>
+  <div class="separator-breadcrumb border-top"></div>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <form [formGroup]="CarForm" (ngSubmit)="onCarSubmit()">
+                <div class="card-body">
+                    <div class="card-title mb-3">Company Details</div>
+                    <div class="form">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-wrap">
+                                    <mat-form-field>
+                                        <input type="text" formControlName="CompanyName" matInput placeholder="Company Name">
+                                        <div *ngIf="submitted && CarForm.controls.CompanyName.errors" class="error">
+                                            <div *ngIf="CarForm.controls.CompanyName.errors.required">Company Name is required
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt5">
+                            <div class="col-md-6">
+                                <label for="">Company Logo - Size (200px * 50px)</label>
+                                <!-- in app.component.html -->
+                                <ngx-dropzone (change)="onSelect($event)" [accept]="'image/png,image/jpeg'" [multiple]="false">
+                                    <ngx-dropzone-label>Upload your Company Logo - Size (200px * 50px)</ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                      </ngx-dropzone-image-preview>
+                                </ngx-dropzone>
+                                <span class="logoerror" *ngIf="logoerror">Please Upload Company Logo</span>
+                            </div>
+                            <div class="col-md-6">
+                                <img [src]="Oldlogo" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <ul class="pull-right btn-list">
+                        <li>
+                            <button mat-raised-button color="primary" type="submit">Submit</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>

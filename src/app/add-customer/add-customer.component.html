@@ -1,0 +1,64 @@
+<div class="breadcrum">
+    <div routerLink="/main/Customer" class="to-back" matRipple> <span class="material-icons">keyboard_backspace</span></div>
+    <h1>Add Customer</h1>
+    <ul class="navi">
+        <li>
+            <a>Customer Management</a>
+        </li>
+        <li>Add Customer</li>
+    </ul>
+  </div>
+  <div class="separator-breadcrumb border-top"></div>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <form [formGroup]="CustomerForm" (ngSubmit)="onCustomerSubmit()">
+                <div class="card-body">
+                    <div class="card-title mb-3">Customer Details</div>
+                    <div class="form">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-wrap">
+                                    <mat-form-field>
+                                        <input type="text" formControlName="CustomerName" matInput placeholder="Customer Name">
+                                        <div *ngIf="submitted && CustomerForm.controls.CustomerName.errors" class="error">
+                                            <div *ngIf="CustomerForm.controls.CustomerName.errors.required">Customer Name is required</div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-wrap">
+                                    <mat-form-field>
+                                        <input type="text" formControlName="CustomerRef" matInput placeholder="Reference No / Docket No" maxlength="20">
+                                        <div *ngIf="submitted && CustomerForm.controls.CustomerRef.errors" class="error">
+                                            <div *ngIf="CustomerForm.controls.CustomerRef.errors.required">Reference No is required</div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-wrap">
+                                    <mat-form-field>
+                                        <input type="text" formControlName="CustomerPone" matInput placeholder="Phone No" maxlength="10">
+                                        <div *ngIf="submitted && CustomerForm.controls.CustomerPone.errors" class="error">
+                                            <div *ngIf="CustomerForm.controls.CustomerPone.errors.required">Phone No is required</div>
+                                            <div *ngIf="CustomerForm.controls.CustomerPone.errors.pattern">Enter Valid Phone No</div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <ul class="pull-right btn-list">
+                        <li>
+                            <button mat-raised-button color="primary" type="submit" [disabled]="btnDisable">Submit</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>

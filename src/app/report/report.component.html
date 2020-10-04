@@ -1,0 +1,95 @@
+<div class="breadcrum">
+    <h1>Reports</h1>
+    <div style="margin:auto;"></div>
+</div>
+<div class="separator-breadcrumb border-top"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+              <!-- <div class="row">
+                <div class="col-md-12">
+                    <div class="flex-r">
+                        <div class="filter">
+                            <mat-radio-group aria-label="Select an option">
+                                <mat-radio-button value="1">ALL</mat-radio-button>
+                                <mat-radio-button value="2">COMPLETED</mat-radio-button>
+                                <mat-radio-button value="3">PENDING</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="icon">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="filter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-filter fa-w-16 fa-3x"><path fill="currentColor" d="M479.968 0H32.038C3.613 0-10.729 34.487 9.41 54.627L192 237.255V424a31.996 31.996 0 0 0 10.928 24.082l64 55.983c20.438 17.883 53.072 3.68 53.072-24.082V237.255L502.595 54.627C522.695 34.528 508.45 0 479.968 0zM288 224v256l-64-56V224L32 32h448L288 224z" class=""></path></svg>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+                <div class="form">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                          </mat-form-field>
+                    </div>
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table mat-table [dataSource]="dataSource">
+                              
+                                  <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> S.No. </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}  </td>
+                                  </ng-container>
+                              
+                                  <ng-container matColumnDef="cName">
+                                    <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.CustomerName}} </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="pNo">
+                                    <th mat-header-cell *matHeaderCellDef> Priority No </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.CustomerRef}} </td>
+                                  </ng-container>
+
+                                   <ng-container matColumnDef="pending">
+                                    <th mat-header-cell *matHeaderCellDef> No of Pending Documents </th>
+                                    <td mat-cell *matCellDef="let element"> 
+                                        <div class="c-red text-center">{{docketCount - element.CompletedCount}}</div>    
+                                    </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="completed">
+                                    <th mat-header-cell *matHeaderCellDef> Completed </th>
+                                    <td mat-cell *matCellDef="let element"> 
+                                        <div class="c-green text-center">
+                                          {{element.CompletedCount}}
+                                        </div>
+                                    </td>
+                                  </ng-container>
+                              
+                                  <ng-container matColumnDef="lastUpdate">
+                                    <th mat-header-cell *matHeaderCellDef> Last Updated </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.LastUpdate}} </td>
+                                  </ng-container>
+
+                                   <ng-container matColumnDef="updateBy">
+                                    <th mat-header-cell *matHeaderCellDef> Updated By </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.UpdatedBy}} </td>
+                                  </ng-container>
+                              
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+                              
+                                <mat-paginator [pageSizeOptions]="[20, 50, 100, 500]" showFirstLastButtons></mat-paginator>
+                              </div>
+                              
+                              
+                              <!-- Copyright 2019 Google LLC. All Rights Reserved.
+                                  Use of this source code is governed by an MIT-style license that
+                                  can be found in the LICENSE file at http://angular.io/license -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

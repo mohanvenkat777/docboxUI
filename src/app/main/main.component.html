@@ -1,0 +1,75 @@
+<div class="main" [ngClass]="toggleClasses()">
+    <header>
+      <div class="logo">
+        <img [src]="logopath" alt="">
+      </div>
+      <div class="toggle" (click)="enableToggle()" matRipple>
+        <i class="icon-menu material-icons">menu</i>
+      </div>
+      <div style="margin: auto;"></div>
+      <div class="right-bar">
+        <ul class="list-group list-unstyled list-group-horizontal">
+          <!-- <li>
+            <h2 class="user">Welcome {{User}}</h2>
+          </li> -->
+          <li>
+            <button mat-button aria-label="Example icon-button with a menu" class="cmenu-btn" [matMenuTriggerFor]="menu2">
+              <span class="wel">Welcome </span> {{username}}
+            </button>
+            <mat-menu #menu2="matMenu">
+              <button mat-menu-item (click)="goToLogin()">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+          </li>
+          
+        </ul>
+      </div>
+    </header>
+    <div class="side-bar-content">
+      <div class="sidebar" slimScroll width="auto" height="250px" size="7px">
+        <ul class="list-unstyled">
+          <li matRipple routerLinkActive="active" routerLink="/main/Dasboard" (click)="mbCloseNav()">
+            <i class="material-icons">dashboard</i>
+            <span class="nav-text">Dashboard</span>
+            <div class="shape"></div>
+          </li>
+          <li matRipple routerLinkActive="active" routerLink="/main/Company" (click)="mbCloseNav()" *ngIf="UserType == 'Super Admin' || UserType == 'Super Admin'">
+            <i class="material-icons">list_alt</i>
+            <span class="nav-text">Companies</span>
+            <div class="shape"></div>
+          </li>
+          <li matRipple routerLinkActive="active" routerLink="/main/User" (click)="mbCloseNav()" *ngIf="UserType == 'Admin' || UserType == 'Super Admin'">
+            <i class="material-icons">speed</i>
+            <span class="nav-text">Users</span>
+            <div class="shape"></div>
+          </li>
+          <li matRipple routerLinkActive="active" routerLink="/main/Customer" (click)="mbCloseNav()">
+            <i class="material-icons">amp_stories</i>
+            <span class="nav-text">Customers</span>
+            <div class="shape"></div>
+          </li>
+          <li matRipple routerLinkActive="active" routerLink="/main/Dockets" (click)="mbCloseNav()" *ngIf="UserType == 'Admin' || UserType == 'Super Admin'">
+            <i class="material-icons">person_add</i>
+            <span class="nav-text">Dockets List</span>
+            <div class="shape"></div>
+          </li>
+          <li matRipple routerLinkActive="active" routerLink="/main/Report" (click)="mbCloseNav()" *ngIf="UserType != 'Super Admin'">
+            <i class="material-icons">library_books</i>
+            <span class="nav-text">Reports</span>
+            <div class="shape"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <main>
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+      <footer>
+        <p>Copyright © {{year}} Khivraj Docbox. All rights reserved.</p>
+      </footer>
+    </main>
+  
+  </div>

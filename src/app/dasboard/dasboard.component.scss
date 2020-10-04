@@ -1,0 +1,35 @@
+.das-card{
+    text-align: center;
+    padding: 20px 10px;
+    .icon{
+        span{
+            font-size: 36px;
+        }
+    }
+    .text{
+        margin-top: 7px;
+    }
+    .count{
+        font-size: 30px;
+        margin-top: 15px;
+    }
+}
+.n-loader{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(255, 255, 255, 0.77);
+	z-index: 9999;
+	overflow: hidden;
+	.spinner-wrap{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform:translate(-50%, -50%);
+	}
+}
+.separator-breadcrumb{
+    margin-bottom: 1rem !important;
+}

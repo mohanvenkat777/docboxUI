@@ -1,0 +1,62 @@
+<div class="breadcrum">
+    <div routerLink="/main/Dockets" class="to-back" matRipple> <span class="material-icons">keyboard_backspace</span></div>
+    <h1>Update Dockets List</h1>
+    <ul class="navi">
+        <li>
+            <a>Dockets List Management</a>
+        </li>
+        <li>Update Dockets List</li>
+    </ul>
+  </div>
+  <div class="separator-breadcrumb border-top"></div>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <form [formGroup]="DocketForm" (ngSubmit)="onCocketSubmit()">
+                <div class="card-body">
+                    <div class="card-title mb-3">Dockets List Details</div>
+                    <div class="form">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-wrap">
+                                    <mat-form-field>
+                                        <input type="text" formControlName="CompanyName" matInput placeholder="Company Name">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-wrap">
+                                    <mat-form-field>
+                                        <input type="text" formControlName="DocumentName" matInput placeholder="Document Name">
+                                        <div *ngIf="submitted && DocketForm.controls.DocumentName.errors" class="error">
+                                            <div *ngIf="DocketForm.controls.DocumentName.errors.required">Document Name is required
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-wrap">
+                                    <mat-form-field>
+                                        <input type="text" formControlName="DocumentSeqNo" matInput placeholder="Sequence No" maxlength="3">
+                                        <div *ngIf="submitted && DocketForm.controls.DocumentSeqNo.errors" class="error">
+                                            <div *ngIf="DocketForm.controls.DocumentSeqNo.errors.required">Sequence No is required</div>
+                                            <div *ngIf="DocketForm.controls.DocumentSeqNo.errors.pattern">Enter Valid Sequence No</div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <ul class="pull-right btn-list">
+                        <li>
+                            <button mat-raised-button color="primary" type="submit" [disabled]="btnDisable">Submit</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>

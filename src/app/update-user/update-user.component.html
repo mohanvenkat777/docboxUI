@@ -1,0 +1,110 @@
+<div class="breadcrum">
+    <div routerLink="/main/User" class="to-back" matRipple> <span class="material-icons">keyboard_backspace</span></div>
+    <h1>Update User</h1>
+    <ul class="navi">
+        <li>
+            <a>User Management</a>
+        </li>
+        <li>Update User</li>
+    </ul>
+</div>
+<div class="separator-breadcrumb border-top"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <form [formGroup]="UserForm" (ngSubmit)="onUserSubmit()">
+                <div class="card-body">
+                    <div class="card-title mb-3">User Details</div>
+                    <div class="form">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-wrap">
+                                    <mat-form-field>
+                                        <mat-label>User Type</mat-label>
+                                        <mat-select formControlName="CompanyName">
+                                          <mat-option *ngFor="let companyList of companyList" [value]="companyList.CompanyName" (click)="updateCompanyId(companyList.CompanyId)">
+                                            {{companyList.CompanyName}}
+                                          </mat-option>
+                                        </mat-select>
+                                        <div *ngIf="submitted && UserForm.controls.CompanyName.errors" class="error">
+                                            <div *ngIf="UserForm.controls.CompanyName.errors.required">Company Name is required
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <input type="text" formControlName="UserName" matInput placeholder="Name">
+                                    <div *ngIf="submitted && UserForm.controls.UserName.errors" class="error">
+                                        <div *ngIf="UserForm.controls.UserName.errors.required">Name is required
+                                        </div>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <input type="text" formControlName="UserPone" matInput placeholder="Phone No" maxlength="10">
+                                    <div *ngIf="submitted && UserForm.controls.UserPone.errors" class="error">
+                                        <div *ngIf="UserForm.controls.UserPone.errors.required">Phone No is required</div>
+                                        <div *ngIf="UserForm.controls.UserPone.errors.pattern">Enter Valid Phone No</div>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <input type="email" formControlName="UserEmail" matInput placeholder="Email ID">
+                                    <div *ngIf="submitted && UserForm.controls.UserEmail.errors" class="error">
+                                        <div *ngIf="UserForm.controls.UserEmail.errors.required">Email is required</div>
+                                        <div *ngIf="UserForm.controls.UserEmail.errors.email">Enter Valid Email</div>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>User Type</mat-label>
+                                    <mat-select formControlName="UserType">
+                                      <mat-option *ngFor="let uType of UserType" [value]="uType.type">
+                                        {{uType.type}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <div *ngIf="submitted && UserForm.controls.UserType.errors" class="error">
+                                        <div *ngIf="UserForm.controls.UserType.errors.required">User Type is required
+                                        </div>
+                                    </div>
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <input type="text" formControlName="UserLogin" matInput placeholder="Login Username">
+                                    <div *ngIf="submitted && UserForm.controls.UserLogin.errors" class="error">
+                                        <div *ngIf="UserForm.controls.UserLogin.errors.required">User Name is required
+                                        </div>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <input type="password" formControlName="UserPassword" matInput placeholder="Password">
+                                    <div *ngIf="submitted && UserForm.controls.UserPassword.errors" class="error">
+                                        <div *ngIf="UserForm.controls.UserPassword.errors.required">Password is required
+                                        </div>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <ul class="pull-right btn-list">
+                        <li>
+                            <button mat-raised-button color="primary" type="submit">Submit</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="breadcrum">
+    <h1>Dashboard</h1>
+    <div style="margin:auto;"></div>
+</div>
+<div class="separator-breadcrumb border-top"></div>
+<div class="row" *ngIf="fiter">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+        <mat-form-field>
+            <mat-label>Filter By Company</mat-label>
+            <mat-select formControlName="CompanyName">
+                <mat-option value="All Company" (click)="filterCompanyId('All Company')">
+                    All Company
+                </mat-option>  
+              <mat-option *ngFor="let companyList of companyList" [value]="companyList.CompanyName" (click)="filterCompanyId(companyList.CompanyId)">
+                {{companyList.CompanyName}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-xl-3 col-sm-6" *ngIf="user == true">
+        <div class="card mb30">
+            <div class="das-card">
+                <div class="icon">
+                    <span class="material-icons">
+                        account_balance
+                    </span>
+                </div>
+                <div class="text">Total No of Users</div>
+                <div class="count">
+                    {{Users}} 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xl-3 col-sm-6">
+        <div class="card mb30">
+            <div class="das-card">
+                <div class="icon">
+                    <span class="material-icons">
+                        assignment
+                    </span>
+                </div>
+                <div class="text">
+                    Total No of Customers
+                </div>
+                <div class="count">
+                    {{Customers}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xl-3 col-sm-6">
+        <div class="card mb30">
+            <div class="das-card">
+                <div class="icon">
+                    <span class="material-icons">
+                        important_devices
+                    </span>
+                </div>
+                <div class="text">
+                    Total No Dockets Scanned
+                </div>
+                <div class="count">
+                    {{Document}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xl-3 col-sm-6">
+        <div class="card mb30">
+            <div class="das-card">
+                <div class="icon">
+                    <span class="material-icons">
+                        featured_play_list
+                    </span>
+                </div>
+                <div class="text">
+                    Total No of Pending Documents
+                </div>
+                <div class="count">
+                    {{PendingDocument}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="n-loader" *ngIf="loader2">
+    <div class="spinner-wrap">
+        <div class="spinner-border text-muted"></div>
+    </div>
+</div>

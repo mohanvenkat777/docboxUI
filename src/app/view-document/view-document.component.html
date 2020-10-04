@@ -1,0 +1,63 @@
+<div class="n-loader" *ngIf="loader2">
+    <div class="spinner-wrap">
+        <div class="spinner-border text-muted"></div>
+    </div>
+</div>
+<div class="breadcrum">
+    <div (click)="back()" class="to-back" matRipple> <span class="material-icons">keyboard_backspace</span></div>
+    <h1>View Document</h1>
+    <ul class="navi">
+        <li>
+            <a>Document Management</a>
+        </li>
+        <li>View Document</li>
+    </ul>
+</div>
+<div class="separator-breadcrumb border-top"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">Document Details</div>
+                <div class="card docker-details">
+                    <div class="row">
+                        <div class="col">
+                            Name: {{CustomerName}}
+                        </div>
+                        <div class="col">
+                            Reference: {{CustomerRef}}
+                        </div>
+                        <div class="col">
+                            Document Type: {{dName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-list">
+                    <ul>
+                        <li *ngFor="let Document of documentData">
+                            <div class="dc-wrap">
+                                <a href="https://docbox.khivrajcommercial.in/{{Document.DocumentPath}}" target="_blank">
+                                    <div *ngIf="Document.DocumentType == '.jpg' || Document.DocumentType == '.png'">
+                                        <img src="https://docbox.khivrajcommercial.in/{{Document.DocumentPath}}" alt="">
+                                    </div>
+                                    <div *ngIf="Document.DocumentType != '.jpg' && Document.DocumentType != '.png'">
+                                        <img src="../../assets/img/document.jpg" alt="">
+                                    </div>
+                                </a>
+                                <div>
+                                    <p>Uploaded On : <span title="{{Document.UploadedOn}}">{{Document.UploadedOn}}</span></p>
+                                    <p>Uploaded By : <span title="{{Document.UploadedBy}}">{{Document.UploadedBy}}</span></p>
+                                </div>
+                                <button class="btn btn-update-document" 
+                                (click)="file.click()" 
+                                (click)="updateDocketID(Document.Id, Document.DocumentPath)">Update Document</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="file" #customerFiled #file (change)="onUpload(file.files)" accept="image/*,.pdf" style="display: none;">
+  

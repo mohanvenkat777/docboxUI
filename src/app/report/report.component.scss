@@ -1,0 +1,9 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+.filter{
+    display: flex;
+    text-align: right;
+    flex-direction: row-reverse;
+    margin-bottom: 10px;
+}

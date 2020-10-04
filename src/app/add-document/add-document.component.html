@@ -1,0 +1,102 @@
+<div class="n-loader" *ngIf="loader2">
+    <div class="spinner-wrap">
+        <div class="spinner-border text-muted"></div>
+    </div>
+</div>
+<div class="breadcrum">
+    <div routerLink="/main/Customer" class="to-back" matRipple> <span class="material-icons">keyboard_backspace</span></div>
+    <h1>Add Document</h1>
+    <ul class="navi">
+        <li>
+            <a>Document Management</a>
+        </li>
+        <li>Add Document</li>
+    </ul>
+</div>
+<div class="separator-breadcrumb border-top"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">Document Details</div>
+                <div class="form">
+                    <div class="card docker-details">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xl-3 col-sm-6 col-sm-6">
+                                Name: {{CustomerName}}
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xl-3 col-sm-6 col-sm-6">
+                                Reference: {{CustomerRef}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xl-3 col-sm-6 col-sm-6" *ngFor="let document of cDocData">
+                            <div class="card document-wrap">
+                                <div class="document-body">
+                                    <h3>{{document.DocumentName}}</h3>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="ques">
+                                                Scanned
+                                            </div>
+                                            <div class="ans">
+                                                <div class="count">
+                                                    {{document.ScaneCount}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="ques">
+                                                Status
+                                            </div>
+                                            <div class="ans">
+                                                <span *ngIf="document.IsCompletd =='Yes'">COMPLETED</span>
+                                                <span *ngIf="document.IsCompletd =='No'" style="color: red;">In Progress</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt20">
+                                        <div class="col-6">
+                                            <div class="ques">
+                                                Is Completed?
+                                            </div>
+                                            <div class="ans">
+                                                <div class="c-witch" *ngIf="document.IsCompletd =='Yes'">
+                                                    <label class="switch">
+                                                        <input class="switch-input" type="checkbox" checked />
+                                                        <span class="switch-label" data-on="Yes" data-off="No" (click)="isCom(document.IsCompletd, document.DocketId)"></span> 
+                                                        <span class="switch-handle"></span> 
+                                                    </label>
+                                                </div>
+                                                <div class="c-witch" *ngIf="document.IsCompletd =='No'">
+                                                    <label class="switch">
+                                                        <input class="switch-input" type="checkbox" />
+                                                        <span class="switch-label" data-on="Yes" data-off="No" (click)="isCom(document.IsCompletd, document.DocketId)"></span> 
+                                                        <span class="switch-handle"></span> 
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="document-foot">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button class="btn-doc b1" (click)="viewDocument(document.DocketId, document.ScaneCount, document.DocumentName)">VIew Document</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="pull-right b2" (click)="file.click()" (click)="updateDocketID(document.DocketId, document.DocumentName)">Upload</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="file" #customerFiled #file (change)="onUpload(file.files)" accept="image/*,.pdf" style="display: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  

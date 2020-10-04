@@ -1,0 +1,45 @@
+<div class="login-main">
+    <div class="login-wrap">
+        <div class="l-left">
+               <div class="content">
+               </div>
+        </div>
+        <div class="l-right">
+            <!-- <h5>WELCOME TO</h5> -->
+            <!-- <img src="../../assets/img/logo.png" class="logo" alt=""> -->
+            <p class="login-t">Login</p>
+            <form [formGroup]="LoginForm" (ngSubmit)="onLoginSubmit()">
+                <div class="form-login">
+                    <input type="text" formControlName="userName" placeholder="Username">
+                    <div *ngIf="submitted && LoginForm.controls.userName.errors" class="error">
+                        <div *ngIf="LoginForm.controls.userName.errors.required">User Name is required
+                        </div>
+                    </div>
+                    <div class="icon">
+                        <i class="material-icons">
+                            perm_identity
+                        </i>
+                    </div>
+                </div>
+                <div class="form-login">
+                    <input type="password" formControlName="password" placeholder="Password">
+                    <div *ngIf="submitted && LoginForm.controls.password.errors" class="error">
+                        <div *ngIf="LoginForm.controls.password.errors.required">Password is required
+                        </div>
+                    </div>
+                    <div class="icon">
+                        <i class="material-icons">
+                            vpn_key
+                        </i>
+                    </div>
+                </div>
+                <div class="form-login">
+                    <button mat-raised-button type="submit" color="primary" class="btn-submit">
+                        Login 
+                        <span class="spinner-border spinner-border-sm" *ngIf="load"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
