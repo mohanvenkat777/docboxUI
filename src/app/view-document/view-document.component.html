@@ -36,9 +36,9 @@
                     <ul>
                         <li *ngFor="let Document of documentData">
                             <div class="dc-wrap">
-                                <a href="https://docbox.khivrajcommercial.in/{{Document.DocumentPath}}" target="_blank">
+                                <a href="https://khivrajdocbox4.s3.ap-south-1.amazonaws.com/{{Document.DocumentPath}}" target="_blank">
                                     <div *ngIf="Document.DocumentType == '.jpg' || Document.DocumentType == '.png'">
-                                        <img src="https://docbox.khivrajcommercial.in/{{Document.DocumentPath}}" alt="">
+                                        <img src="https://khivrajdocbox4.s3.ap-south-1.amazonaws.com/{{Document.DocumentPath}}" alt="">
                                     </div>
                                     <div *ngIf="Document.DocumentType != '.jpg' && Document.DocumentType != '.png'">
                                         <img src="../../assets/img/document.jpg" alt="">

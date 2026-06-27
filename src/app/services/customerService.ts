@@ -9,18 +9,14 @@ import { Observable, from as _observableFrom, throwError as _observableThrow, of
 export class customerService {
 
   constructor(private _http : HttpClient) { }
-  private url = "https://docbox.khivrajcommercial.in/api/";
-  // private url = "http://localhost:51133/api/";
+  private url = "http://localhost:3000/api/";
+  // private url = "https://docbox.khivrajcommercial.in/api/";
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  // Enquiry managemennt
-  public GetCustomer() : Observable<any>  {
-    let url = this.url;  
-    url = url.replace(/[?&]$/, "");
-    const response = this._http.get(url+"Customer/GetCustomer/");
-    return response;
+  public GetCustomer(page: number = 1, pageSize: number = 50) : Observable<any>  {
+    return this._http.get(this.url + `Customer/GetCustomer?page=${page}&pageSize=${pageSize}`);
   }
   
   // Create Company
@@ -53,19 +49,13 @@ export class customerService {
 
 
   // User Based
-  public getUserBasedCustomer(userId) : Observable<any>  {
-    let url = this.url;  
-    url = url.replace(/[?&]$/, "");
-    const response = this._http.get(url+"Customer/getUserBasedCustomer?userId="+userId);
-    return response;
+  public getUserBasedCustomer(userId, page: number = 1, pageSize: number = 50) : Observable<any>  {
+    return this._http.get(this.url + `Customer/getUserBasedCustomer?userId=${userId}&page=${page}&pageSize=${pageSize}`);
   }
 
   // Admin Based
-  public getUserAdminCustomer(companyId) : Observable<any>  {
-    let url = this.url;  
-    url = url.replace(/[?&]$/, "");
-    const response = this._http.get(url+"Customer/getAdminBasedCustomer?companyId="+companyId);
-    return response;
+  public getUserAdminCustomer(companyId, page: number = 1, pageSize: number = 50) : Observable<any>  {
+    return this._http.get(this.url + `Customer/getAdminBasedCustomer?companyId=${companyId}&page=${page}&pageSize=${pageSize}`);
   }
   
   

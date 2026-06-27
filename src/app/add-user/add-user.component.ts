@@ -104,7 +104,8 @@ export class AddUserComponent implements OnInit {
     {id: '1', type: 'Admin'},
     {id: '2', type: 'User'},
     {id: '3', type: 'Auditor'},
-    {id: '3', type: 'RTO'}
+    {id: '4', type: 'RTO'},
+    {id: '5', type: 'RTO_Admin'}
   ];
 }
 

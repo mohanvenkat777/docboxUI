@@ -132,8 +132,8 @@ export class AddDocumentComponent implements OnInit {
 
     
     var fileSize = file[0].size / 1024 / 1024;
-    if(fileSize > 1){
-      this._docbox.openSnackBar("The file size can not exceed 1MB.", "OK");
+    if(fileSize > .5){
+      this._docbox.openSnackBar("The file size can not exceed 500KB.", "OK");
       this.customerFiled.nativeElement.value = ""; 
     }else{
       if(file[0].type)

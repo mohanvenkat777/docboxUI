@@ -50,7 +50,7 @@
             <span class="nav-text">Customers</span>
             <div class="shape"></div>
           </li>
-          <li matRipple routerLinkActive="active" routerLink="/main/Dockets" (click)="mbCloseNav()" *ngIf="UserType == 'Admin' || UserType == 'Super Admin'">
+          <li matRipple routerLinkActive="active" routerLink="/main/Dockets" (click)="mbCloseNav()" *ngIf="UserType == 'Admin' || UserType == 'Super Admin' || UserType == 'RTO_Admin'">
             <i class="material-icons">person_add</i>
             <span class="nav-text">Dockets List</span>
             <div class="shape"></div>

@@ -31,15 +31,25 @@ export class UpdateCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.CustomerForm = this.formBuilder.group({
       CustomerName: ['', Validators.required],
-      CustomerPone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+      CustomerPone: new FormControl('', [Validators.required]),
       CustomerRef: ['', Validators.required],
     });
     this.cID = this.route.snapshot.queryParamMap.get('cID');
-    this._customerService.getCustomerData(this.cID).subscribe(cData => {
-      this.CustomerForm.controls["CustomerName"].setValue(cData["Response"].CustomerName);
-      this.CustomerForm.controls["CustomerPone"].setValue(cData["Response"].CustomerPone);
-      this.CustomerForm.controls["CustomerRef"].setValue(cData["Response"].CustomerRef);
-    });
+    console.log('[UpdateCustomer] cID from route:', this.cID);
+    this._customerService.getCustomerData(this.cID).subscribe(
+      cData => {
+        console.log('[UpdateCustomer] API response:', cData);
+        const r = cData['Response'];
+        if (!r) { console.error('[UpdateCustomer] Response is null/undefined'); return; }
+        this.CustomerForm.patchValue({
+          CustomerName: r.CustomerName,
+          CustomerPone: r.CustomerPone,
+          CustomerRef:  r.CustomerRef,
+        });
+        console.log('[UpdateCustomer] Form values after patch:', this.CustomerForm.value);
+      },
+      err => console.error('[UpdateCustomer] HTTP error:', err)
+    );
   }
 
   onCustomerSubmit(){

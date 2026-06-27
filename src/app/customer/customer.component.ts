@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import { customerService } from "../services/customerService";
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { customerService } from '../services/customerService';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,47 +9,68 @@ import { Router } from '@angular/router';
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
-export class CustomerComponent implements OnInit {
+export class CustomerComponent implements OnInit, AfterViewInit {
 
-  dataSource = new MatTableDataSource;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  customers: any[] = [];
+  totalRecords = 0;
+  pageSize = 50;
+  isLoading = false;
+
+  displayedColumns: string[] = ['id', 'name', 'ref', 'phone', 'date', 'edit', 'add'];
 
   constructor(
-    private _customerService:customerService,
-    private router:Router,
-    ) { }
+    private _customerService: customerService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.customer();
+    this.loadCustomers(1, this.pageSize);
   }
 
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => {
+      this.loadCustomers(this.paginator.pageIndex + 1, this.paginator.pageSize);
+    });
+  }
 
-  customer(){
-    if(localStorage.getItem("UserType") == "User"){
-      this._customerService.getUserBasedCustomer(localStorage.getItem("UserID")).subscribe(data => {
-        this.dataSource.data = data['Response'].reverse();
-        console.log(this.dataSource.data.length);
-      });
-    } else if(localStorage.getItem("UserType") == "Admin" || localStorage.getItem("UserType") == "Auditor" || localStorage.getItem("UserType") == "RTO"){
-      this._customerService.getUserAdminCustomer(localStorage.getItem("CompanyId")).subscribe(data => {
-        this.dataSource.data = data['Response'].reverse();
-      });
-    } else{
-      this._customerService.GetCustomer().subscribe(data => {
-        this.dataSource.data = data['Response'].reverse()
-      })
+  loadCustomers(page: number, pageSize: number) {
+    this.isLoading = true;
+    const userType = localStorage.getItem('UserType');
+
+    if (userType === 'User') {
+      this._customerService
+        .getUserBasedCustomer(localStorage.getItem('UserID'), page, pageSize)
+        .subscribe(data => this.handleResponse(data));
+    } else if (userType === 'Admin' || userType === 'Auditor' || userType === 'RTO') {
+      this._customerService
+        .getUserAdminCustomer(localStorage.getItem('CompanyId'), page, pageSize)
+        .subscribe(data => this.handleResponse(data));
+    } else {
+      this._customerService
+        .GetCustomer(page, pageSize)
+        .subscribe(data => this.handleResponse(data));
     }
   }
-  displayedColumns: string[] = ['id','name', 'ref', 'phone', "date", 'edit','add'];
-  edit(cID) {
+
+  handleResponse(data: any) {
+    this.customers = data['Response'] || [];
+    this.totalRecords = data['Total'] || 0;
+    this.paginator.length = this.totalRecords;
+    this.isLoading = false;
+  }
+
+  currentOffset(): number {
+    return this.paginator.pageIndex * this.paginator.pageSize;
+  }
+
+  edit(cID: any) {
     this.router.navigate(['/main/UpdateCustomer'], { queryParams: { cID: cID } });
   }
-  addDocument(cID){
+
+  addDocument(cID: any) {
     this.router.navigate(['/main/AddDocument'], { queryParams: { cID: cID } });
-  }
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

@@ -27,7 +27,7 @@ export class DasboardComponent implements OnInit {
       this.companyList = data["Response"]
     });
     this.customer();
-    if(localStorage.getItem("UserType") == "Super Admin"){
+    if(localStorage.getItem("UserType") == "Super Admin" || localStorage.getItem("UserType") == "RTO_Admin"){
       this.fiter = true
     }
   }

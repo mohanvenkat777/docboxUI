@@ -74,8 +74,8 @@ export class ViewDocumentComponent implements OnInit {
       fileType = ".pdf";
     }
     var fileSize = file[0].size / 1024 / 1024;
-    if(fileSize > 1){
-      this._docbox.openSnackBar("The file size can not exceed 1MB.", "OK");
+    if(fileSize > .5){
+      this._docbox.openSnackBar("The file size can not exceed 500KB.", "OK");
       this.customerFiled.nativeElement.value = ""; 
     }else{
       this._docbox.getBase64(file[0]).then(result =>{
