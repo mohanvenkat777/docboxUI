@@ -9,7 +9,7 @@ import { Observable, from as _observableFrom, throwError as _observableThrow, of
 export class companyService {
 
   constructor(private _http : HttpClient) { }
-  private url = "http://localhost:3000/api/";
+  private url = "http://68.178.174.88/api/";
   // private url = "https://docbox.khivrajcommercial.in/api/";
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
